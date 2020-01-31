@@ -32,7 +32,9 @@ def fiveCharWordWithL33t(password_hashes):
 
 # Cracks a five-digit password with at least one of the following characters
 # in the beginning: * ~ ! #
-def fiveDigitWithSpecial(password_hashes):
+# means 4 numbers with a special character in front
+# method is called from inside upToSevenDigits function if on a 4 digit number so that number generation is only needed once
+def fiveDigitWithSpecial(password_hashes,testValue):
     cracked_hashes = []
     cracked_passwords = []
 

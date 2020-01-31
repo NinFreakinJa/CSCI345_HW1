@@ -15,6 +15,7 @@
 # fiveCharWordWithL33t() to run after singleWord() methods finds all five-
 # character words.
 from ethan import fiveCharWordWithL33t
+import hashlib
 
 WORD_DIR = "/usr/share/dict/words"
 
@@ -62,3 +63,27 @@ def upToSevenDigits(password_hashes):
 
     appendToFile(cracked_hashes, cracked_passwords)
     return password_hashes
+
+#Recursive helper function to test all possible digit combinations
+def __digitHelper(password_hashes, currTest):
+    #if no passwords to test return
+    if not password_hashes:
+        return None
+    #default parameter
+    else if (currTest is None):
+        return __digitHelper(password_hashes,"")
+    else:
+        #if the string is not empty
+        if currTest:
+            #create and compare hashes
+            hashTest=hashlib.sha256(currTest).hexdigest
+            for i in password_hashes:
+                if (hashTest==i):
+                    appendToFile([hashTest],[currTest])
+                    password_hashes.remove(i)
+        #recursively creates all possible digit combinations up to 7 digits
+        if(currTest.length<7):
+            for i in range(10):
+                password_hashes=__digitHelper(password_hashes,currTest+str(i))
+        return password_hashes
+

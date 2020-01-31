@@ -56,12 +56,8 @@ def singleWord(password_hashes):
 
 # Cracks a number up to seven digits in length (may have leading zeroes).
 def upToSevenDigits(password_hashes):
-    cracked_hashes = []
-    cracked_passwords = []
-
-    # Method body.
-
-    appendToFile(cracked_hashes, cracked_passwords)
+    #all work is done in recursive helper function
+    password_hashes=__digitHelper(password_hashes,None)
     return password_hashes
 
 #Recursive helper function to test all possible digit combinations
@@ -85,5 +81,6 @@ def __digitHelper(password_hashes, currTest):
         if(currTest.length<7):
             for i in range(10):
                 password_hashes=__digitHelper(password_hashes,currTest+str(i))
+        #returns updated list of unsolved password hashes
         return password_hashes
 

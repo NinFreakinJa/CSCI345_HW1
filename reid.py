@@ -42,7 +42,8 @@ def sevenCharWithDigit(password_hashes,testValue):
         # Test each password
         cracked_hashes=[j for j in password_hashes if (hashTest==j)]
         cracked_passwords=[]
-        password_hashes=[k for k in password_hashes if j not in cracked_hashes]
+        #Remove found passwords
+        password_hashes=[k for k in password_hashes if k not in cracked_hashes]
         for k in range(len(cracked_hashes)):
             cracked_passwords.append(temp2)
         appendToFile(cracked_hashes,cracked_passwords)
@@ -58,14 +59,28 @@ def singleWord(password_hashes):
     cracked_passwords = []
     with open(WORD_DIR, "r") as file:
         lines = file.readlines()
+    # Read each word from the dictionary
     for i in range(0, len(lines)):
+        # Quits if nothing to test
         if not password_hashes:
             return None
-
-    appendToFile(cracked_hashes, cracked_passwords)
-    # Running other word-based attacks from here using only words that
-    # meet length requirements.
-    password_hashes = sevenCharWithDigit(password_hashes)
+        else:
+            word=lines[i]
+            # Calls other dictionary cracking methods if requirements are met
+            if(len(word)==7):
+                password_hashes=sevenCharWithDigit(password_hashes,word)
+            else if(len(word)==5 and ("a" in word or "l" in word)):
+                password_hashes=fiveCharWordWithL33t(password_hashes,word)
+            hashTest=hashlib.sha256(word).hexdigest()
+            # Test each password
+            cracked_hashes=[j for j in password_hashes if (hashTest==j)]
+            cracked_passwords=[]
+            #Remove found passwords
+            password_hashes=[k for k in password_hashes if k not in cracked_hashes]
+            for k in range(len(cracked_hashes)):
+                cracked_passwords.append(word)
+            appendToFile(cracked_hashes,cracked_passwords)
+    file.close()
     return fiveCharWordWithL33t(password_hashes)
 
 # Cracks a number up to seven digits in length (may have leading zeroes).

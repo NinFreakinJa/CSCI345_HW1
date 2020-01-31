@@ -21,7 +21,7 @@ def appendToFile(cracked_hashes, cracked_passwords):
 
 # Cracks a five-character word where the letter 'a' is converted to '@' and
 # 'l' is converted to '1'.
-def fiveCharWordWithL33t(password_hashes):
+def fiveCharWordWithL33t(password_hashes, testValue):
     cracked_hashes = []
     cracked_passwords = []
 
@@ -51,4 +51,5 @@ def getHashesFromFile(inFile):
     for i in range(0, len(lines)):
         line = lines[i].split(':')
         lines[i] = line[1]
+    file.close()
     return lines

@@ -32,14 +32,8 @@ def main():
     # singleWord() located in reid.py
     password_hashes = singleWord(password_hashes)
 
-    # sevenCharWithDigit() located in reid.py
-    password_hashes = sevenCharWithDigit(password_hashes)
-
     # fiveDigitWithSpecial() located in ethan.py
     password_hashes = fiveDigitWithSpecial(password_hashes)
-
-    # fiveCharWordWithL33t() located in ethan.py
-    password_hashes = fiveCharWordWithL33t(password_hashes)
 
     # upToSevenDigits() located in reid.py
     password_hashes = upToSevenDigits(password_hashes)

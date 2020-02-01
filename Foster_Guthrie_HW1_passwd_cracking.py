@@ -34,6 +34,8 @@ def main():
     # Getting password hashes from file.
     password_hashes = getHashesFromFile(argv[1])
 
+    
+
     print("Starting....\n")
     # singleWord() located in reid.py
     password_hashes = singleWord(password_hashes, getWordDir(argv))

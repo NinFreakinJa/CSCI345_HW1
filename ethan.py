@@ -36,11 +36,18 @@ def fiveCharWordWithL33t(password_hashes, test_value):
     test_value_hash = sha256(str.encode(test_value)).hexdigest()
 
     # Testing for equivalence against provided hashes.
-    for i in range(0, len(password_hashes)):
-        if password_hashes[i] == test_value_hash:
-            appendToFile([test_value_hash], [test_value])
-            password_hashes.pop(i)
-            break
+    cracked_hashes=[j for j in password_hashes if (test_value_hash==j)]
+    if cracked_hashes:
+        cracked_passwords=[]
+        password_hashes=[k for k in password_hashes if k not in cracked_hashes]
+        for k in range(len(cracked_hashes)):
+            cracked_passwords.append(test_value)
+        appendToFile(cracked_hashes,cracked_passwords)
+    #for i in range(0, len(password_hashes)):
+     #   if password_hashes[i] == test_value_hash:
+      #      appendToFile([test_value_hash], [test_value])
+       #     password_hashes.pop(i)
+        #    break
 
     return password_hashes
 
@@ -52,11 +59,18 @@ def fiveDigitWithSpecial(password_hashes, test_value):
     special_characters = ['*', '~', '!', '#']
     for i in special_characters:
         test_value_hash = sha256(str.encode(i + test_value)).hexdigest()
-        for j in range(0, len(password_hashes)):
-            if password_hashes[j] == test_value_hash:
-                appendToFile([test_value_hash], [i + test_value])
-                password_hashes.pop(j)
-                return password_hashes
+        cracked_hashes=[j for j in password_hashes if (test_value_hash==j)]
+        if cracked_hashes:
+            cracked_passwords=[]
+            password_hashes=[k for k in password_hashes if k not in cracked_hashes]
+            for k in range(len(cracked_hashes)):
+                cracked_passwords.append(i + test_value)
+            appendToFile(cracked_hashes,cracked_passwords)
+        #for j in range(0, len(password_hashes)):
+         #   if password_hashes[j] == test_value_hash:
+          #      appendToFile([test_value_hash], [i + test_value])
+           #     password_hashes.pop(j)
+            #    return password_hashes
 
     return password_hashes
 

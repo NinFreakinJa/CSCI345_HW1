@@ -51,9 +51,9 @@ def sevenCharWithDigit(password_hashes,testValue):
         if password_hashes[i] == hashTest:
             appendToFile([hashTest], [test_value])
             password_hashes.pop(i)
-            break
+            return password_hashes
 
-        '''
+    '''
         # Test each password
         cracked_hashes=[j for j in password_hashes if (hashTest==j)]
         cracked_passwords=[]
@@ -66,8 +66,8 @@ def sevenCharWithDigit(password_hashes,testValue):
         #    if (hashTest==j):
          #           appendToFile([hashTest],[temp2])
           #          password_hashes.remove(j)
-        '''
     return password_hashes
+    '''
 
 # Cracks a single word.
 def singleWord(password_hashes):

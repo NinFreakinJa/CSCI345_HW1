@@ -26,16 +26,21 @@ from reid import *
 from sys import argv
 
 def main():
+    print("Reading words from /usr/share/dict/words")
     # getInfoFromFile() located in ethan.py
     password_hashes = getHashesFromFile(argv[1])
 
+    print("Starting....")
     # singleWord() located in reid.py
     password_hashes = singleWord(password_hashes)
 
-    # fiveDigitWithSpecial() located in ethan.py
-    password_hashes = fiveDigitWithSpecial(password_hashes)
-
     # upToSevenDigits() located in reid.py
     password_hashes = upToSevenDigits(password_hashes)
+
+    print("....Password cracking complete!")
+    if len(password_hashes) > 0:
+        print("Not all passwords could be cracked!")
+    else:
+        print("All passwords have been cracked!")
 
 main()

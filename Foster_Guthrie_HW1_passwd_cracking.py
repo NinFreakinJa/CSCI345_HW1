@@ -26,22 +26,31 @@ from reid import *
 from sys import argv
 
 def main():
-    if len(argv) != 2:
-        print("Usage: python3 Foster_Guthrie_HW1_passwd_cracking.py <input_file>")
+    # Checking command line arguments.
+    if len(argv) != 2 and len(argv) != 3:
+        print("Usage: python3 Foster_Guthrie_HW1_passwd_cracking.py <input_file> [word_file]")
         return -1
+
+    # Getting password hashes from file.
     password_hashes = getHashesFromFile(argv[1])
 
-    print("Starting....")
+    print("Starting....\n")
     # singleWord() located in reid.py
-    password_hashes = singleWord(password_hashes)
+    password_hashes = singleWord(password_hashes, getWordDir(argv))
 
     # upToSevenDigits() located in reid.py
     password_hashes = upToSevenDigits(password_hashes)
 
-    print("....Password cracking complete!")
+    print("\n....Password cracking complete!")
     if password_hashes:
         print("Not all passwords could be cracked!")
     else:
         print("All passwords have been cracked!")
+
+def getWordDir(args):
+    if len(args) == 3:
+        return argv[2]
+    else:
+        return "/usr/share/dict/words"
 
 main()

@@ -6,3 +6,7 @@ Run the script using the following syntax:
 
 input_file is assumed to be a text file containing password hashes in the following format:
     Username:SHA-256_Password[:optional_parameters]
+
+
+word_file is assumed to be a text file containing a list of dictionary words separated one per
+line which is assumed to be /usr/share/dict/words unless otherwise specified.

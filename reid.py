@@ -18,8 +18,6 @@ from ethan import fiveCharWordWithL33t
 from ethan import fiveDigitWithSpecial
 from hashlib import sha256
 
-WORD_DIR = "/usr/share/dict/words"
-
 # Prints and appends cracked hashes and passwords to the output file.
 def appendToFile(cracked_hashes, cracked_passwords):
     with open("passwords.pot", "a") as file:
@@ -59,7 +57,7 @@ def sevenCharWithDigit(password_hashes,testValue):
     return password_hashes
 
 # Cracks a single word.
-def singleWord(password_hashes):
+def singleWord(password_hashes, WORD_DIR="/usr/share/dict/words"):
     with open(WORD_DIR, "r") as file:
         lines = file.readlines()
     # Read each word from the dictionary

@@ -51,22 +51,6 @@ def sevenCharWithDigit(password_hashes,testValue):
 
     return password_hashes
 
-    '''
-        # Test each password
-        cracked_hashes=[j for j in password_hashes if (hashTest==j)]
-        cracked_passwords=None
-        #Remove found passwords
-        password_hashes=[k for k in password_hashes if k not in cracked_hashes]
-        for k in range(len(cracked_hashes)):
-            cracked_passwords.append(temp2)
-        appendToFile(cracked_hashes,cracked_passwords)
-        #for j in password_hashes:
-        #    if (hashTest==j):
-         #           appendToFile([hashTest],[temp2])
-          #          password_hashes.remove(j)
-    return password_hashes
-    '''
-
 # Cracks a single word.
 def singleWord(password_hashes):
     cracked_hashes = []
@@ -98,18 +82,6 @@ def singleWord(password_hashes):
     
     appendToFile(cracked_hashes, cracked_passwords)
     return password_hashes
-
-    '''
-            # Test each password
-            cracked_hashes=[j for j in password_hashes if (hashTest==j)]
-            cracked_passwords=None
-            #Remove found passwords
-            password_hashes=[k for k in password_hashes if k not in cracked_hashes]
-            for k in range(len(cracked_hashes)):
-                cracked_passwords.append(word)
-            appendToFile(cracked_hashes,cracked_passwords)
-    return password_hashes
-    '''
 
 # Cracks a number up to seven digits in length (may have leading zeroes).
 def upToSevenDigits(password_hashes):
@@ -149,4 +121,3 @@ def __digitHelper(password_hashes, currTest):
                 password_hashes=__digitHelper(password_hashes,currTest+str(i))
         #returns updated list of unsolved password hashes
         return password_hashes
-

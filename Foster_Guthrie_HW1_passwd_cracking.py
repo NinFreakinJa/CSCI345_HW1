@@ -38,7 +38,7 @@ def main():
     password_hashes = upToSevenDigits(password_hashes)
 
     print("....Password cracking complete!")
-    if len(password_hashes) > 0:
+    if password_hashes:
         print("Not all passwords could be cracked!")
     else:
         print("All passwords have been cracked!")

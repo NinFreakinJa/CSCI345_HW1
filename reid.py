@@ -31,32 +31,30 @@ def appendToFile(cracked_hashes, cracked_passwords):
 # single-digit number is appended.
 # Called within main dictionary cracking method
 def sevenCharWithDigit(password_hashes,testValue):
-    #returns none if nothing to test
+    #returns None if nothing to test
     if not password_hashes:
         return None
-    
+
     temp=testValue.capitalize()
-    if(temp[:2] == "Pu"):
-        print(temp)
     #Tested with each number
     for i in range(10):
         temp2=temp+str(i)
-        if temp == "Puzzles":
-            print(temp2)
         # Hash resulting string.
         hashTest=sha256(str.encode(temp2)).hexdigest()
 
         # Testing for equivalence against provided hashes.
         for j in range(0, len(password_hashes)):
-        if password_hashes[i] == hashTest:
-            appendToFile([hashTest], [test_value])
-            password_hashes.pop(i)
-            return password_hashes
+            if password_hashes[j] == hashTest:
+                appendToFile([hashTest], [temp2])
+                password_hashes.pop(j)
+                return password_hashes
+
+    return password_hashes
 
     '''
         # Test each password
         cracked_hashes=[j for j in password_hashes if (hashTest==j)]
-        cracked_passwords=[]
+        cracked_passwords=None
         #Remove found passwords
         password_hashes=[k for k in password_hashes if k not in cracked_hashes]
         for k in range(len(cracked_hashes)):
@@ -91,15 +89,27 @@ def singleWord(password_hashes):
             # Hash word.
             hashTest=sha256(str.encode(word)).hexdigest()
 
+            # Testing for equivalence against provided hashes.
+            for j in range(0, len(password_hashes)):
+                if password_hashes[j] == hashTest:
+                    cracked_hashes.append(password_hashes[j])
+                    cracked_passwords.append(word)
+                    password_hashes.pop(j)
+    
+    appendToFile(cracked_hashes, cracked_passwords)
+    return password_hashes
+
+    '''
             # Test each password
             cracked_hashes=[j for j in password_hashes if (hashTest==j)]
-            cracked_passwords=[]
+            cracked_passwords=None
             #Remove found passwords
             password_hashes=[k for k in password_hashes if k not in cracked_hashes]
             for k in range(len(cracked_hashes)):
                 cracked_passwords.append(word)
             appendToFile(cracked_hashes,cracked_passwords)
     return password_hashes
+    '''
 
 # Cracks a number up to seven digits in length (may have leading zeroes).
 def upToSevenDigits(password_hashes):
@@ -121,7 +131,7 @@ def __digitHelper(password_hashes, currTest):
             #create and compare hashes
             hashTest=sha256(str.encode(currTest)).hexdigest()
             cracked_hashes=[j for j in password_hashes if (hashTest==j)]
-            cracked_passwords=[]
+            cracked_passwords=None
             password_hashes=[k for k in password_hashes if k not in cracked_hashes]
             for k in range(len(cracked_hashes)):
                 cracked_passwords.append(currTest)

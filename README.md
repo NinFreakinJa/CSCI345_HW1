@@ -1,4 +1,9 @@
 # CSCI345_HW1
 ### Reid Foster, Ethan Guthrie
-#
-## Foster_Guthrie_HW1_passwd_cracking.py
+
+## Usage
+Run the script using the following syntax:
+```
+python3 Foster_Guthrie_HW1_passwd_cracking.py <input_file>
+```
+```input_file``` is assumed to be a text file containing password hashes in the format ```Username:SHA-256_Password[:optional_parameters]```

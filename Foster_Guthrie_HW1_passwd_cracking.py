@@ -26,8 +26,9 @@ from reid import *
 from sys import argv
 
 def main():
-    print("Reading words from /usr/share/dict/words")
-    # getInfoFromFile() located in ethan.py
+    if len(argv) != 2:
+        print("Usage: python3 Foster_Guthrie_HW1_passwd_cracking.py <input_file>")
+        return -1
     password_hashes = getHashesFromFile(argv[1])
 
     print("Starting....")

@@ -16,9 +16,8 @@
 # character words.
 from ethan import fiveCharWordWithL33t
 from ethan import fiveDigitWithSpecial
+from Foster_Guthrie_HW1_passwd_cracking import WORD_DIR
 from hashlib import sha256
-
-WORD_DIR = "/usr/share/dict/words"
 
 # Prints and appends cracked hashes and passwords to the output file.
 def appendToFile(cracked_hashes, cracked_passwords):

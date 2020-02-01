@@ -25,20 +25,25 @@ from reid import *
 # The sys library allows for python to access command-line arguments.
 from sys import argv
 
+WORD_DIR = "/usr/share/dict/words"
+
 def main():
-    if len(argv) != 2:
-        print("Usage: python3 Foster_Guthrie_HW1_passwd_cracking.py <input_file>")
+    if len(argv) != 2 and len(argv != 3):
+        print("Usage: python3 Foster_Guthrie_HW1_passwd_cracking.py <input_file> [word_file]")
         return -1
+    if len(argv) != 3:
+        WORD_DIR = argv[2]
+    
     password_hashes = getHashesFromFile(argv[1])
 
-    print("Starting....")
+    print("Starting....\n")
     # singleWord() located in reid.py
     password_hashes = singleWord(password_hashes)
 
     # upToSevenDigits() located in reid.py
     password_hashes = upToSevenDigits(password_hashes)
 
-    print("....Password cracking complete!")
+    print("\n....Password cracking complete!")
     if password_hashes:
         print("Not all passwords could be cracked!")
     else:

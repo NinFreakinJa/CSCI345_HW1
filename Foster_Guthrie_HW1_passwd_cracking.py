@@ -34,7 +34,23 @@ def main():
     # Getting password hashes from file.
     password_hashes = getHashesFromFile(argv[1])
 
-    
+    # Testing to make sure hashes provided haven't already been solved in a
+    # previous run. This is not intended to function as a rainbow table, as
+    # it only works on consecuitive runs of the code.
+    try:
+        with open("passwords.pot", "r") as file:
+            passwords_pot = file.readlines()
+        reused = []
+        for pair in passwords_pot:
+            cracked_hash = pair.rstrip('\n').split(":")[0]
+            for i in range(0, len(password_hashes)):
+                if cracked_hash == password_hashes[i]:
+                    reused.append(password_hashes[i])
+                    if len(reused) == 1:
+                        print("Some hashes have already been cracked during a previous run! These entries entries will be skipped (see passwords.pot for cracked hashes)!")
+        password_hashes = list(set(password_hashes).difference(reused))
+    except Exception as e:
+        pass
 
     print("Starting....\n")
     # singleWord() located in reid.py
@@ -43,7 +59,7 @@ def main():
     # upToSevenDigits() located in reid.py
     password_hashes = upToSevenDigits(password_hashes)
 
-    print("\n....Password cracking complete!")
+    print("\n....done!")
     if password_hashes:
         print("Not all passwords could be cracked!")
     else:
